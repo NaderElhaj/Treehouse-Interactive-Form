@@ -36,6 +36,9 @@ window.onload = onLoad = () =>{
     creditCard.style.display ="none" ; 
     paypal.style.display ="none" ; 
     bitcoin.style.display ="none" ; 
+    shirtColors.style.display ="none" ; 
+    payment.value="credit-card" ;
+    creditCard.style.display="block"
     
 }
 
@@ -52,7 +55,7 @@ form.addEventListener('submit',(e)=>{
         userName.parentNode.classList.remove('not-valid')
         userName.parentNode.classList.add('valid')
     }
-    const mailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/
+    const mailRegex = /[^@]+@[^@.]+\./i
     const reg = mailRegex.test(email.value) ;
     if(reg===false){
         e.preventDefault()
@@ -74,17 +77,17 @@ form.addEventListener('submit',(e)=>{
     
     if(payment.value==="credit-card" ){
         e.preventDefault()
-        if(creditCardNumber.value.length<13||creditCardNumber.value.length>16||creditCardNumber.value.type!=number){
+        if(creditCardNumber.value.length<13||creditCardNumber.value.length>16||isNaN(creditCardNumber.value)){
             ccHint.style.display="block"
             creditCardNumber.classList.add('not-valid')
             creditCardNumber.classList.remove('valid')
          
-        }else{
+        }else if (creditCardNumber.value.length>13||creditCardNumber.value.length>16||isNaN(creditCardNumber.value)===false){
             ccHint.style.display="none"
             creditCardNumber.classList.remove('not-valid')
             creditCardNumber.classList.add('valid')
         }
-        if(zipNumber.value.length !=5){
+        if(zipNumber.value.length !=5||isNaN(zipNumber.value)){
             e.preventDefault()
             zipHint.style.display="block"
             zipNumber.classList.add('not-valid')
@@ -94,7 +97,7 @@ form.addEventListener('submit',(e)=>{
             zipNumber.classList.remove('not-valid')
             zipNumber.classList.add('valid')
         }
-        if(cvv.value.length !=3){
+        if(cvv.value.length !=3 ||isNaN(cvv.value)){
             e.preventDefault()
             cvvHint.style.display="block"
             cvv.classList.add('not-valid')
