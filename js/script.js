@@ -43,6 +43,20 @@ window.onload = onLoad = () =>{
 }
 
 //Form Validation  
+email.addEventListener('keyup',e =>{
+    const mailRegex = /[^@]+@[^@.]+\.\w+/i
+    const reg = mailRegex.test(e.target.value) ;
+    if(reg===false){
+        e.preventDefault()
+        emailHint.style.display ="block"
+        email.parentNode.classList.add('not-valid')
+        email.parentNode.classList.remove('valid')
+    }else{
+        emailHint.style.display ="none"
+        email.parentNode.classList.remove('not-valid')
+        email.parentNode.classList.add('valid')
+    }
+})
 form.addEventListener('submit',(e)=>{
     
     if (userName.value ===""){
@@ -55,7 +69,7 @@ form.addEventListener('submit',(e)=>{
         userName.parentNode.classList.remove('not-valid')
         userName.parentNode.classList.add('valid')
     }
-    const mailRegex = /[^@]+@[^@.]+\./i
+    const mailRegex = /[^@]+@[^@.]+\.\w+/i
     const reg = mailRegex.test(email.value) ;
     if(reg===false){
         e.preventDefault()
@@ -76,16 +90,17 @@ form.addEventListener('submit',(e)=>{
     
     
     if(payment.value==="credit-card" ){
-        e.preventDefault()
         if(creditCardNumber.value.length<13||creditCardNumber.value.length>16||isNaN(creditCardNumber.value)){
             ccHint.style.display="block"
             creditCardNumber.classList.add('not-valid')
             creditCardNumber.classList.remove('valid')
+            e.preventDefault()
          
-        }else if (creditCardNumber.value.length>13||creditCardNumber.value.length>16||isNaN(creditCardNumber.value)===false){
+        }else if (creditCardNumber.value.length>12||creditCardNumber.value.length<17||isNaN(creditCardNumber.value)===false){
             ccHint.style.display="none"
             creditCardNumber.classList.remove('not-valid')
             creditCardNumber.classList.add('valid')
+            
         }
         if(zipNumber.value.length !=5||isNaN(zipNumber.value)){
             e.preventDefault()
@@ -143,7 +158,7 @@ title.addEventListener('click', (e) => {
 	else otherJob.style.display = 'none';
 });
 //selecting The Shirt Design
-shirtDesigns.addEventListener('click', (e) => {
+shirtDesigns.addEventListener('change', (e) => {
     const jsPuns = document.querySelectorAll('.js-puns')
     const heartJs = document.querySelectorAll('.heart-js')
 	if (e.target.value == 'js puns') {
@@ -153,10 +168,12 @@ shirtDesigns.addEventListener('click', (e) => {
         }
         for (let i=0 ;i<jsPuns.length;i++){
             jsPuns[i].style.display ="block"
+            jsPuns[0].selected = true;
         }
     }else if (e.target.value == 'heart js'){
         for (let i=0 ;i<heartJs.length;i++){
             heartJs[i].style.display ="block"
+            heartJs[0].selected = true;
         }
         for (let i=0 ;i<jsPuns.length;i++){
             jsPuns[i].style.display ="none"
@@ -196,7 +213,7 @@ document.querySelector('.activities').addEventListener('change', (e) => {
     
 });
 //Selecting Your Payment Method
-paymentMethod.addEventListener('click' ,(e)=>{
+paymentMethod.addEventListener('change' ,(e)=>{
     if (e.target.value == "credit-card"){
         creditCard.style.display ="block" ; 
         paypal.style.display ="none" ; 
