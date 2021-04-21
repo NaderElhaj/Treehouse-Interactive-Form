@@ -92,35 +92,35 @@ form.addEventListener('submit',(e)=>{
     if(payment.value==="credit-card" ){
         if(creditCardNumber.value.length<13||creditCardNumber.value.length>16||isNaN(creditCardNumber.value)){
             ccHint.style.display="block"
-            creditCardNumber.classList.add('not-valid')
-            creditCardNumber.classList.remove('valid')
+            creditCardNumber.parentNode.classList.add('not-valid')
+            creditCardNumber.parentNode.classList.remove('valid')
             e.preventDefault()
          
         }else if (creditCardNumber.value.length>12||creditCardNumber.value.length<17||isNaN(creditCardNumber.value)===false){
             ccHint.style.display="none"
-            creditCardNumber.classList.remove('not-valid')
-            creditCardNumber.classList.add('valid')
+            creditCardNumber.parentNode.classList.remove('not-valid')
+            creditCardNumber.parentNode.classList.add('valid')
             
         }
         if(zipNumber.value.length !=5||isNaN(zipNumber.value)){
             e.preventDefault()
             zipHint.style.display="block"
-            zipNumber.classList.add('not-valid')
-            zipNumber.classList.remove('valid')
+            zipNumber.parentNode.classList.add('not-valid')
+            zipNumber.parentNode.classList.remove('valid')
         }else{
             zipHint.style.display="none"
-            zipNumber.classList.remove('not-valid')
-            zipNumber.classList.add('valid')
+            zipNumber.parentNode.classList.remove('not-valid')
+            zipNumber.parentNode.classList.add('valid')
         }
         if(cvv.value.length !=3 ||isNaN(cvv.value)){
             e.preventDefault()
             cvvHint.style.display="block"
-            cvv.classList.add('not-valid')
-            cvv.classList.remove('valid')
+            cvv.parentNode.classList.add('not-valid')
+            cvv.parentNode.classList.remove('valid')
         }else{
             cvvHint.style.display="none"
-            cvv.classList.remove('not-valid')
-            cvv.classList.add('valid')
+            cvv.parentNode.classList.remove('not-valid')
+            cvv.parentNode.classList.add('valid')
         }
 
 
